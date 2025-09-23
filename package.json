@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/your-username/softuni-movie-magic-workshop#readme",
   "dependencies": {
-    "express": "^5.1.0"
+    "express": "^5.1.0",
+    "express-handlebars": "^8.0.1"
   }
 }

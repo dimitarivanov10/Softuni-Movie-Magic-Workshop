@@ -1,10 +1,22 @@
 import express from "express";
+import handlebars from "express-handlebars";
 
 const app = express();
 
-app.get("/", (req, res)=>{
-    res.send("Working 100%");
-})
+app.engine(
+  "hbs",
+  handlebars.engine({
+    extname: "hbs",
+  })
+);
 
-app.listen(5000, ()=>console.log("Server listening on http://localhost 5000..."));
+app.set("view engine", "hbs");
+app.set("views", "src/views");
 
+app.get("/", (req, res) => {
+  res.render("home", { layout: false });
+});
+
+app.listen(5000, () =>
+  console.log("Server listening on http://localhost 5000...")
+);
