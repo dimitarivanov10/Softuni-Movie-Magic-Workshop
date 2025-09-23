@@ -1,0 +1,22 @@
+{
+  "name": "softuni-movie-magic-workshop",
+  "version": "1.0.0",
+  "description": "JavaScript Back-end project",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node --watch index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/your-username/softuni-movie-magic-workshop.git"
+  },
+  "bugs": {
+    "url": "https://github.com/your-username/softuni-movie-magic-workshop/issues"
+  },
+  "homepage": "https://github.com/your-username/softuni-movie-magic-workshop#readme"
+}
