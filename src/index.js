@@ -1,7 +1,6 @@
 import express from "express";
 import handlebars from "express-handlebars";
-import homeController from "./controllers/homeController.js";
-import movieController from "./controllers/movieController.js";
+import routes from "./routes.js";
 const app = express();
 
 //Setup handlebars
@@ -19,8 +18,7 @@ app.set("views", "src/views");
 app.use(express.static("src/public"));
 
 //Routes
-app.use(homeController);
-app.use(movieController);
+app.use(routes);
 
 //Start server
 app.listen(5000, () =>
