@@ -20,4 +20,7 @@ movieController.get("/:movieId/details", (req, res) => {
   res.render("details", { movie });
 });
 
+movieController.get("/search", (req, res) => {
+  res.render("search");
+});
 export default movieController;
