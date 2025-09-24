@@ -9,7 +9,7 @@ const movies = [
       "A wealthy man attempts to abandon his family on vacation after the death of his mother.",
     imageUrl: "/img/sundown-movie.jpg",
     director: "Michel Franco",
-    year: 2021,
+    year: "2021",
     rating: 6.1,
     category: "movie",
   },
@@ -21,7 +21,7 @@ const movies = [
       "A Ukrainian language teacher and a rebellious teenage student fall for each other during the tumultuous time of the Russian-Ukrainian war.",
     imageUrl: "/img/the-forgotten-movie.jpg",
     director: "Artemio Benki",
-    year: 2019,
+    year: "2019",
     rating: 6.6,
     category: "movie",
   },
@@ -33,7 +33,7 @@ const movies = [
       "Chronicles a multi-faceted, 15-year span of pre-and post-Civil War expansion and settlement of the American west.",
     imageUrl: "/img/horizon-am-saga-movie.jpg",
     director: "Kevin Costner",
-    year: 2024,
+    year: "2024",
     rating: 5.5,
     category: "movie",
   },
@@ -45,7 +45,7 @@ const movies = [
       "A fixer for a criminal organization is hired by a crime boss to protect her daughter during her trip to the city for her birthday celebration.",
     imageUrl: "/img/whispers-in-shadows-movie.jpg",
     director: "Ralph Sepe Jr.",
-    year: 2024,
+    year: "2024",
     rating: 7.2,
     category: "movie",
   },
@@ -63,6 +63,17 @@ export default class Movie {
     if (filter._id) {
       result = movies.filter((movie) => movie._id === filter_.id);
     }
+
+    if (filter.title) {
+    }
+
+    if (filter.genre) {
+    }
+
+    if (filter.year) {
+      result = result.filter((movie) => movie.year === filter.year);
+    }
+
     return result;
   }
 
