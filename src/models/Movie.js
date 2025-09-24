@@ -16,7 +16,7 @@ const movies = [
   {
     _id: "b7c8d9e0-f1g2-3h4i-5j6k-l7m8n9o0p1q2",
     title: "The Forgotten",
-    genre: "Drama, Romance, War",
+    genre: "Drama",
     description:
       "A Ukrainian language teacher and a rebellious teenage student fall for each other during the tumultuous time of the Russian-Ukrainian war.",
     imageUrl: "/img/the-forgotten-movie.jpg",
@@ -40,7 +40,7 @@ const movies = [
   {
     _id: "d5e6f7g8-h9i0-1j2k-3l4m-n5o6p7q8r9s0",
     title: "Whispers in Shadows",
-    genre: "Crime, Drama, Thriller",
+    genre: "Crime",
     description:
       "A fixer for a criminal organization is hired by a crime boss to protect her daughter during her trip to the city for her birthday celebration.",
     imageUrl: "/img/whispers-in-shadows-movie.jpg",
@@ -68,6 +68,7 @@ export default class Movie {
     }
 
     if (filter.genre) {
+      result = result.filter(movie => movie.genre.toLowerCase() === filter.genre.toLowerCase());
     }
 
     if (filter.year) {
