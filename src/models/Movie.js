@@ -2,7 +2,7 @@ import { v4 as uuid } from "uuid";
 
 const movies = [
   {
-    id: "a1b2c3d4-e5f6-7g8h-9i0j-k1l2m3n4o5p6",
+    _id: "a1b2c3d4-e5f6-7g8h-9i0j-k1l2m3n4o5p6",
     title: "Sundown",
     genre: "Drama",
     description:
@@ -14,7 +14,7 @@ const movies = [
     category: "movie",
   },
   {
-    id: "b7c8d9e0-f1g2-3h4i-5j6k-l7m8n9o0p1q2",
+    _id: "b7c8d9e0-f1g2-3h4i-5j6k-l7m8n9o0p1q2",
     title: "The Forgotten",
     genre: "Drama, Romance, War",
     description:
@@ -26,7 +26,7 @@ const movies = [
     category: "movie",
   },
   {
-    id: "c3d4e5f6-g7h8-9i0j-1k2l-m3n4o5p6q7r8",
+    _id: "c3d4e5f6-g7h8-9i0j-1k2l-m3n4o5p6q7r8",
     title: "Horizon: An American Saga – Chapter 1",
     genre: "Western",
     description:
@@ -38,7 +38,7 @@ const movies = [
     category: "movie",
   },
   {
-    id: "d5e6f7g8-h9i0-1j2k-3l4m-n5o6p7q8r9s0",
+    _id: "d5e6f7g8-h9i0-1j2k-3l4m-n5o6p7q8r9s0",
     title: "Whispers in Shadows",
     genre: "Crime, Drama, Thriller",
     description:
