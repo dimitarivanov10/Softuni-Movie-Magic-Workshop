@@ -1,7 +1,22 @@
 import express from "express";
 import handlebars from "express-handlebars";
+import mongoose from "mongoose";
+
 import routes from "./routes.js";
+
 const app = express();
+
+//Setup DB
+const url = "mongodb://localhost:27017";
+
+try {
+  await mongoose.connect(url, {
+    dbName: "movie-magic"
+  })
+  console.log("DB Successfully connected");
+} catch (error) {
+  console.error(error.message);
+}
 
 //Setup handlebars
 app.engine(
