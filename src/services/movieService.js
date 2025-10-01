@@ -1,7 +1,7 @@
 import Movie from "../models/Movie.js";
 
 export default {
-   getAll(filter={}) {
+  getAll(filter = {}) {
     // const result = await Movie.find(filter).lean();
 
     let query = Movie.find();
@@ -41,5 +41,11 @@ export default {
     // return movie.save();
 
     return Movie.create(movieData);
+  },
+
+  async attach(movieId, castId) {
+    const movie = await Movie.findById(movieId);
+    movie.cast.push(castId);
+    return movie.save();
   },
 };
