@@ -7,13 +7,13 @@ movieController.get("/create", (req, res) => {
   res.render("create", { pageTitle: "Create Page" });
 });
 
-movieController.post("/create", async(req, res) => {
+movieController.post("/create", async (req, res) => {
   const movieData = req.body;
   await movieService.create(movieData);
   res.redirect("/");
 });
 
-movieController.get("/:movieId/details", async(req, res) => {
+movieController.get("/:movieId/details", async (req, res) => {
   const movieId = req.params.movieId;
   const movie = await movieService.getOne(movieId);
 
@@ -25,7 +25,7 @@ movieController.get("/:movieId/details", async(req, res) => {
   });
 });
 
-movieController.get("/search", async(req, res) => {
+movieController.get("/search", async (req, res) => {
   const filter = req.query;
 
   const movies = await movieService.getAll(filter);
@@ -33,9 +33,11 @@ movieController.get("/search", async(req, res) => {
   res.render("search", { movies, filter, pageTitle: "Search Page" });
 });
 
-movieController.get("/:movieId/attach", (req, res)=>{
-  res.render("casts/attach");
-});
+movieController.get("/:movieId/attach", async (req, res) => {
+  const movieId = req.params.movieId;
+  const movie = await movieService.getOne(movieId);
 
+  res.render("casts/attach", {movie});
+});
 
 export default movieController;
