@@ -32,4 +32,10 @@ movieController.get("/search", async(req, res) => {
 
   res.render("search", { movies, filter, pageTitle: "Search Page" });
 });
+
+movieController.get("/:movieId/attach", (req, res)=>{
+  res.render("casts/attach");
+});
+
+
 export default movieController;
