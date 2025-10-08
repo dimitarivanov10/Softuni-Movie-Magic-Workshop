@@ -17,9 +17,13 @@ authController.get("/login", (req, res) => {
   res.render("auth/login");
 });
 
-authController.post("/login", (req, res) => {
-  console.log(req.body);
-  res.end();
+authController.post("/login", async(req, res) => {
+  const {email, password} = req.body;
+  const token = await userService.login(email, password);
+
+  console.log(token);
+
+  res.redirect("/")
 });
 
 export default authController;
