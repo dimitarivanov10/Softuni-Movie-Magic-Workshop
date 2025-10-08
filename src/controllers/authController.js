@@ -10,20 +10,20 @@ authController.get("/register", (req, res) => {
 authController.post("/register", async (req, res) => {
   const userData = req.body;
   await userService.register(userData);
-  res.redirect("/");
+  res.redirect("/auth/login");
 });
 
 authController.get("/login", (req, res) => {
   res.render("auth/login");
 });
 
-authController.post("/login", async(req, res) => {
-  const {email, password} = req.body;
+authController.post("/login", async (req, res) => {
+  const { email, password } = req.body;
   const token = await userService.login(email, password);
 
-  console.log(token);
+  res.cookie("auth", token);
 
-  res.redirect("/")
+  res.redirect("/");
 });
 
 export default authController;
