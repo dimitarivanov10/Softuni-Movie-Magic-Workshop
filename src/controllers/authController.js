@@ -17,4 +17,9 @@ authController.get("/login", (req, res) => {
   res.render("auth/login");
 });
 
+authController.post("/login", (req, res) => {
+  console.log(req.body);
+  res.end();
+});
+
 export default authController;
