@@ -22,10 +22,13 @@ movieController.get("/:movieId/details", async (req, res) => {
   const movie = await movieService.getOneDetailed(movieId);
 
   const ratingViewData = "&#x2605;".repeat(Math.trunc(movie.rating));
+
+  const isCreator = movie.creator && movie.creator.equals(req.user?.id);
   res.render("movies/details", {
     movie,
     pageTitle: "Details Page",
     rating: ratingViewData,
+    isCreator,
   });
 });
 
