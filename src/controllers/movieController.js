@@ -5,6 +5,8 @@ import castService from "../services/castService.js";
 const movieController = Router();
 
 movieController.get("/create", (req, res) => {
+
+
   res.render("create", { pageTitle: "Create Page" });
 });
 
