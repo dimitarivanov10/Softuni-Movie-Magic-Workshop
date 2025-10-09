@@ -35,16 +35,16 @@ export default {
     return Movie.findById(movieId);
   },
 
-  getOneDetailed(movieId){
+  getOneDetailed(movieId) {
     return this.getOne(movieId).populate("casts");
   },
 
-  create(movieData) {
-    movieData.rating = Number(movieData.rating);
-    // const movie = new Movie(movieData);
-    // return movie.save();
-
-    return Movie.create(movieData);
+  create(movieData, userId) {
+    return Movie.create({
+      ...movieData,
+      rating: Number(movieData.rating),
+      creator: userId,
+    });
   },
 
   async attach(movieId, castId) {
