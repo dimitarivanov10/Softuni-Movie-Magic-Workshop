@@ -12,8 +12,23 @@ const userSchema = new Schema({
     type: String,
     required: [true, "Password is required"],
     match: [/^[a-zA-Z0-9]+$/],
-    minLength: [6, "Password should be at least 6 characters!"]
+    minLength: [6, "Password should be at least 6 characters!"],
   },
+});
+
+userSchema
+  .virtual("rePassword")
+  .get(function () {
+    return this._rePassword;
+  })
+  .set(function (value) {
+    this._rePassword = value;
+  });
+
+userSchema.pre("validate", function () {
+  if (this.isNew && this.password !== this.rePassword) {
+    this.invalidate("rePassword", "Password missmatch!");
+  }
 });
 
 userSchema.pre("save", async function () {
