@@ -43,7 +43,7 @@ movieController.get("/:movieId/details", async (req, res) => {
       isCreator,
     });
   } catch (error) {
-    res.redirect("/404");
+    res.render("404", { error: "Movie not found!" });
   }
 });
 
