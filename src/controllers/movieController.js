@@ -17,10 +17,11 @@ movieController.post("/create", isAuth, async (req, res) => {
     await movieService.create(movieData, userId);
     res.redirect("/");
   } catch (error) {
-    const errorMessage = getErrorMessage(error);
-    res
-      .status(400)
-      .render("movies/create", { error: errorMessage, movie: movieData });
+    res.status(400).render("movies/create", {
+      error: getErrorMessage(error),
+      movie: movieData,
+      categories: getMovieCategoryViewData(movieData.category),
+    });
   }
 });
 

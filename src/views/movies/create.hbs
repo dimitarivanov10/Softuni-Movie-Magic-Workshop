@@ -10,22 +10,32 @@
       <ul class="noBullet">
         <li>
           <label for="title">Title:</label>
-          <input type="text" class="inputFields" id="title" name="title" value="{{movie.title}}" />
+          <input
+            type="text"
+            class="inputFields"
+            id="title"
+            name="title"
+            value="{{movie.title}}"
+          />
         </li>
         <li>
           <label for="category">Category:</label>
           <select id="category" class="inputFields" name="category">
             <option value="">Select Category</option>
-            <option value="tv-show">TV Show</option>
-            <option value="animation">Animation</option>
-            <option value="movie">Movie</option>
-            <option value="documentary">Documentary</option>
-            <option value="short-film">Short Film</option>
+            {{#each categories}}
+            <option value="{{value}}" {{selected}}>{{label}}</option>
+            {{/each}}
           </select>
         </li>
         <li>
           <label for="genre">Genre:</label>
-          <input type="text" class="inputFields" id="genre" name="genre" value="{{movie.genre}}" />
+          <input
+            type="text"
+            class="inputFields"
+            id="genre"
+            name="genre"
+            value="{{movie.genre}}"
+          />
         </li>
         <li>
           <label for="director">Director:</label>
@@ -39,15 +49,33 @@
         </li>
         <li>
           <label for="date">Year:</label>
-          <input type="number" class="inputFields" id="year" name="year" value="{{movie.year}}"/>
+          <input
+            type="number"
+            class="inputFields"
+            id="year"
+            name="year"
+            value="{{movie.year}}"
+          />
         </li>
         <li>
           <label for="image">Movie Poster:</label>
-          <input type="text" class="inputFields" id="image" name="imageUrl" value="{{movie.imageUrl}}"/>
+          <input
+            type="text"
+            class="inputFields"
+            id="image"
+            name="imageUrl"
+            value="{{movie.imageUrl}}"
+          />
         </li>
         <li>
           <label for="image">Rating:</label>
-          <input type="text" class="inputFields" id="rating" name="rating" value="{{movie.rating}}"/>
+          <input
+            type="text"
+            class="inputFields"
+            id="rating"
+            name="rating"
+            value="{{movie.rating}}"
+          />
         </li>
         <li>
           <label for="description">Description:</label>
