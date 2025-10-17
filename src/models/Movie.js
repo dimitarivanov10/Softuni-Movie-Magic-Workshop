@@ -5,7 +5,7 @@ const movieSchema = new Schema({
     type: String,
     required: [true, "Movie title is required!"],
     minLength: [5, "Title is too short"],
-    match: [/^[a-zA-Z0-9]+$/, "Title has some invalid characters!"],
+    match: [/^[a-zA-Z0-9\s]+$/, "Title has some invalid characters!"],
   },
   category: {
     type: String,
@@ -19,13 +19,13 @@ const movieSchema = new Schema({
     type: String,
     required: [true, "Movie genre is required!"],
     minLength: [5, "Movie genre is too short"],
-    match: [/^[a-zA-Z0-9]+$/, "Movie genre has some invalid characters!"],
+    match: [/^[a-zA-Z0-9\s]+$/, "Movie genre has some invalid characters!"],
   },
   director: {
     type: String,
     required: [true, "Movie director is required!"],
     minLength: [5, "Director is too short"],
-    match: [/^[a-zA-Z0-9]+$/, "Director has some invalid characters!"],
+    match: [/^[a-zA-Z0-9\s]+$/, "Director has some invalid characters!"],
   },
   year: {
     type: Number,
@@ -48,7 +48,7 @@ const movieSchema = new Schema({
     type: String,
     required: [true, "Movie description is required!"],
     min: [20, "Movie description should be at leas 20 characters long!"],
-    match: [/^[a-zA-Z0-9]+$/, "Description has some invalid characters!"],
+    match: [/^[a-zA-Z0-9\s]+$/, "Description has some invalid characters!"],
   },
   casts: [
     {
