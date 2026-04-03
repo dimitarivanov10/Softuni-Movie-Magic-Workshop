@@ -50,91 +50,65 @@ Movie Magic is a comprehensive back-end workshop project demonstrating full-stac
 
 ## 🏗 Architecture
 
-graph TD
-    subgraph Client [" "]
-        A["Client Browser"]
-    end
 
-    subgraph Server ["Express Application"]
-        B["HTTP Requests"]
-        
-        subgraph Middleware ["Middleware Stack"]
-            M1["Static Files"]
-            M2["URL Encoded Parser"]
-            M3["Cookie Parser"]
-            M4["Auth Middleware"]
-        end
-
-        R["Routes"]
-        C["Controllers"]
-        S["Services (Business Logic)"]
-        MO["Models (Mongoose Schemas)"]
-    end
-
-    subgraph DB [" "]
-        D[("MongoDB Database")]
-    end
-
-    A --> B
-    B --> M1
-    M1 --> M2
-    M2 --> M3
-    M3 --> M4
-    M4 --> R
-    R --> C
-    C --> S
-    S --> MO
-    MO --> D
 
 ## 📁 Project Structure
 
-src/
-├── config/
-│ └── constants.js # Configuration constants (JWT_SECRET, etc.)
-├── controllers/
-│ ├── authController.js # Authentication logic (login/register/logout)
-│ ├── homeController.js # Home and about page routes
-│ ├── movieController.js # Movie CRUD operations
-│ └── castController.js # Cast member management
-├── models/
-│ ├── User.js # User schema with password hashing
-│ ├── Movie.js # Movie schema with validation
-│ └── Cast.js # Cast member schema
-├── services/
-│ ├── authService.js # Authentication business logic
-│ ├── movieService.js # Movie business logic
-│ └── castService.js # Cast business logic
-├── middlewares/
-│ └── authMiddleware.js # JWT verification and auth guards
-├── utils/
-│ ├── errorUtils.js # Error message formatting
-│ └── tokenUtils.js # JWT generation utilities
-├── views/
-│ ├── layouts/
-│ │ └── main.hbs # Main layout template
-│ ├── home.hbs # Home page with movie catalog
-│ ├── about.hbs # About page
-│ ├── search.hbs # Search page with filters
-│ ├── 404.hbs # Not found page
-│ ├── auth/
-│ │ ├── login.hbs # Login form
-│ │ └── register.hbs # Registration form
-│ ├── movies/
-│ │ ├── create.hbs # Create movie form
-│ │ ├── details.hbs # Movie details with casts
-│ │ └── edit.hbs # Edit movie form
-│ ├── casts/
-│ │ ├── create.hbs # Create cast form
-│ │ └── attach.hbs # Attach cast to movie
-│ └── partials/
-│ └── movie.hbs # Movie card partial
-├── public/
-│ ├── css/ # Stylesheets
-│ └── img/ # Images
-├── routes.js # Route definitions
-└── index.js # Application entry point
-
-
+````bash
+📁 softuni-movie-magic-workshop/
+├── 📁 src/
+│   ├── 📁 config/
+│   │   └── constants.js              # JWT_SECRET & app configuration
+│   ├── 📁 controllers/
+│   │   ├── authController.js         # Login, register, logout logic
+│   │   ├── homeController.js         # Home & about page routes
+│   │   ├── movieController.js        # Movie CRUD operations
+│   │   └── castController.js         # Cast member management
+│   ├── 📁 models/
+│   │   ├── User.js                   # User schema with password hashing
+│   │   ├── Movie.js                  # Movie schema with validation
+│   │   └── Cast.js                   # Cast schema with validation
+│   ├── 📁 services/
+│   │   ├── authService.js            # Authentication business logic
+│   │   ├── movieService.js           # Movie filtering & DB operations
+│   │   └── castService.js            # Cast query & creation logic
+│   ├── 📁 middlewares/
+│   │   └── authMiddleware.js         # JWT verification & route guards
+│   ├── 📁 utils/
+│   │   ├── errorUtils.js             # Error message formatting
+│   │   └── tokenUtils.js             # JWT generation utilities
+│   ├── 📁 views/
+│   │   ├── 📁 layouts/
+│   │   │   └── main.hbs              # Base layout with navigation
+│   │   ├── 📁 partials/
+│   │   │   └── movie.hbs             # Reusable movie card component
+│   │   ├── home.hbs                  # Movie catalog homepage
+│   │   ├── about.hbs                 # About page
+│   │   ├── search.hbs                # Search with filters
+│   │   ├── 404.hbs                   # Not found page
+│   │   ├── 📁 auth/
+│   │   │   ├── login.hbs             # Login form
+│   │   │   └── register.hbs          # Registration form
+│   │   ├── 📁 movies/
+│   │   │   ├── create.hbs            # Create movie form
+│   │   │   ├── details.hbs           # Movie details with casts
+│   │   │   └── edit.hbs              # Edit movie form
+│   │   └── 📁 casts/
+│   │       ├── create.hbs            # Create cast form
+│   │       └── attach.hbs            # Attach cast to movie
+│   ├── 📁 public/
+│   │   ├── 📁 css/
+│   │   │   └── style.css             # Main stylesheet
+│   │   └── 📁 img/
+│   │       ├── logo.webp             # Site logo
+│   │       ├── about-image.png       # About page image
+│   │       └── error-image.webp      # 404 error image
+│   ├── routes.js                     # Route aggregation
+│   └── index.js                      # Application entry point
+├── package.json                      # Dependencies & scripts
+├── package-lock.json                 # Dependency lock file
+└── README.md                         # Project documentation
+````
 ## ✨ Features
 
 ### User Management
