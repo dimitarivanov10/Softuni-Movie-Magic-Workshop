@@ -50,46 +50,42 @@ Movie Magic is a comprehensive back-end workshop project demonstrating full-stac
 
 ## 🏗 Architecture
 
-┌─────────────────────────────────────────────────────┐
-│ Client Browser │
-└─────────────────┬───────────────────────────────────┘
-│ HTTP Requests
-▼
-┌─────────────────────────────────────────────────────┐
-│ Express Application │
-│ ┌─────────────────────────────────────────────┐ │
-│ │ Middleware Stack │ │
-│ │ • Static Files │ │
-│ │ • URL Encoded Parser │ │
-│ │ • Cookie Parser │ │
-│ │ • Auth Middleware │ │
-│ └─────────────────────────────────────────────┘ │
-│ │
-│ ┌──────────────┐ ┌──────────────┐ │
-│ │ Routes │ ───► │ Controllers │ │
-│ └──────────────┘ └──────┬───────┘ │
-│ │ │
-│ ▼ │
-│ ┌──────────────┐ │
-│ │ Services │ │
-│ │ (Business │ │
-│ │ Logic) │ │
-│ └──────┬───────┘ │
-│ │ │
-│ ▼ │
-│ ┌──────────────┐ │
-│ │ Models │ │
-│ │ (Mongoose │ │
-│ │ Schemas) │ │
-│ └──────┬───────┘ │
-└─────────────────────────────┼─────────────────────┘
-│
-▼
-┌─────────────────┐
-│ MongoDB │
-│ Database │
-└─────────────────┘
+```mermaid
+graph TD
+    subgraph Client [" "]
+        A[Client Browser]
+    end
 
+    subgraph Server ["Express Application"]
+        B[HTTP Requests]
+        
+        subgraph Middleware ["Middleware Stack"]
+            M1["• Static Files"]
+            M2["• URL Encoded Parser"]
+            M3["• Cookie Parser"]
+            M4["• Auth Middleware"]
+        end
+
+        R[Routes]
+        C[Controllers]
+        S[Services<br/>(Business Logic)]
+        MO[Models<br/>(Mongoose Schemas)]
+    end
+
+    subgraph DB [" "]
+        D[(MongoDB Database)]
+    end
+
+    A -->|HTTP Requests| B
+    B --> M1
+    M1 --> M2
+    M2 --> M3
+    M3 --> M4
+    M4 --> R
+    R --> C
+    C --> S
+    S --> MO
+    MO -->|Queries/Updates| D
 The project follows the **MVC (Model-View-Controller)** pattern with a clear separation of concerns:
 
 
