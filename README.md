@@ -50,33 +50,32 @@ Movie Magic is a comprehensive back-end workshop project demonstrating full-stac
 
 ## 🏗 Architecture
 
-```mermaid
 graph TD
     subgraph Client [" "]
-        A[Client Browser]
+        A["Client Browser"]
     end
 
     subgraph Server ["Express Application"]
-        B[HTTP Requests]
+        B["HTTP Requests"]
         
         subgraph Middleware ["Middleware Stack"]
-            M1["• Static Files"]
-            M2["• URL Encoded Parser"]
-            M3["• Cookie Parser"]
-            M4["• Auth Middleware"]
+            M1["Static Files"]
+            M2["URL Encoded Parser"]
+            M3["Cookie Parser"]
+            M4["Auth Middleware"]
         end
 
-        R[Routes]
-        C[Controllers]
-        S[Services<br/>(Business Logic)]
-        MO[Models<br/>(Mongoose Schemas)]
+        R["Routes"]
+        C["Controllers"]
+        S["Services (Business Logic)"]
+        MO["Models (Mongoose Schemas)"]
     end
 
     subgraph DB [" "]
-        D[(MongoDB Database)]
+        D[("MongoDB Database")]
     end
 
-    A -->|HTTP Requests| B
+    A --> B
     B --> M1
     M1 --> M2
     M2 --> M3
@@ -85,18 +84,7 @@ graph TD
     R --> C
     C --> S
     S --> MO
-    MO -->|Queries/Updates| D
-The project follows the **MVC (Model-View-Controller)** pattern with a clear separation of concerns:
-
-
-
-### Layer Description
-
-1. **Presentation Layer (Views)** - Handlebars templates for UI rendering
-2. **Controller Layer** - Handles HTTP requests/responses and orchestrates actions
-3. **Service Layer (Business Logic)** - Contains core application logic and data validation
-4. **Data Access Layer (Models)** - Mongoose schemas for database interaction
-5. **Middleware Layer** - Intercepts requests for cross-cutting concerns
+    MO --> D
 
 ## 📁 Project Structure
 
