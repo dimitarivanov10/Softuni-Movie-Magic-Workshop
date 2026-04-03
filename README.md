@@ -49,7 +49,178 @@ Movie Magic is a comprehensive back-end workshop project demonstrating full-stac
 - **nodemon** (via --watch flag) - Auto-reload during development
 
 ## 🏗 Architecture
+````bash
+│
+├── 🔵 PRESENTATION LAYER (Views)
+│   ├── 📁 views/
+│   │   ├── layouts/main.hbs      # Base HTML wrapper
+│   │   ├── home.hbs              # Movie catalog display
+│   │   ├── search.hbs            # Search form & results
+│   │   ├── movies/details.hbs    # Single movie view
+│   │   ├── movies/create.hbs     # Movie creation form
+│   │   ├── movies/edit.hbs       # Movie edit form
+│   │   ├── casts/create.hbs      # Cast creation form
+│   │   ├── casts/attach.hbs      # Attach cast to movie
+│   │   ├── auth/login.hbs        # Login form
+│   │   ├── auth/register.hbs     # Registration form
+│   │   ├── about.hbs             # About page
+│   │   └── 404.hbs               # Not found page
+│   │
+│   └── 📁 partials/
+│       └── movie.hbs              # Reusable movie card component
+│
+├── 🟢 CONTROLLER LAYER (Request Handlers)
+│   ├── 📁 controllers/
+│   │   ├── homeController.js     # GET /, GET /about
+│   │   ├── movieController.js    # CRUD operations for movies
+│   │   ├── castController.js     # Create & manage casts
+│   │   └── authController.js     # Login, register, logout
+│   │
+│   └── 📁 middlewares/
+│       └── authMiddleware.js     # isAuth, isGuest guards
+│
+├── 🟡 SERVICE LAYER (Business Logic)
+│   └── 📁 services/
+│       ├── movieService.js       # Movie filtering, CRUD logic
+│       ├── castService.js        # Cast queries & exclusions
+│       └── authService.js        # Password hashing, JWT generation
+│
+├── 🔴 MODEL LAYER (Database & Schemas)
+│   └── 📁 models/
+│       ├── Movie.js              # Movie schema with validation
+│       ├── Cast.js               # Cast schema with validation
+│       └── User.js               # User schema with bcrypt hashing
+│
+└── 🟣 DATA STORAGE
+    └── 🗄️ MongoDB
+        ├── 📁 users collection   # Email + hashed password
+        ├── 📁 movies collection  # Movie data + casts[] + creator
+        └── 📁 casts collection   # Cast member information
 
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📊 REQUEST FLOW EXAMPLE (Create Movie)
+
+┌─────────────┐
+│   Browser   │
+│  POST /movies/create
+└──────┬──────┘
+       │
+       ▼
+┌─────────────────────────────────────────────────────────────┐
+│  🟢 CONTROLLER LAYER                                        │
+│  movieController.post('/create')                            │
+│  ├── isAuth guard (checks JWT)                             │
+│  ├── Extracts movieData from req.body                      │
+│  └── Calls movieService.create(movieData, userId)          │
+└──────┬──────────────────────────────────────────────────────┘
+       │
+       ▼
+┌─────────────────────────────────────────────────────────────┐
+│  🟡 SERVICE LAYER                                           │
+│  movieService.create()                                      │
+│  ├── Validates input data                                  │
+│  ├── Adds creator field (userId)                           │
+│  ├── Converts rating to Number                             │
+│  └── Calls Movie.create()                                  │
+└──────┬──────────────────────────────────────────────────────┘
+       │
+       ▼
+┌─────────────────────────────────────────────────────────────┐
+│  🔴 MODEL LAYER                                             │
+│  Movie.create(movieData)                                    │
+│  ├── Schema validation (required, minLength, regex)        │
+│  ├── Saves to MongoDB                                      │
+│  └── Returns Mongoose document                             │
+└──────┬──────────────────────────────────────────────────────┘
+       │
+       ▼
+┌─────────────────────────────────────────────────────────────┐
+│  🗄️ DATABASE                                                │
+│  MongoDB - movies collection                                │
+│  └── Inserts new movie document                            │
+└──────┬──────────────────────────────────────────────────────┘
+       │
+       ▼
+┌─────────────┐
+│   Browser   │
+│  Redirect to /
+└─────────────┘
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🔐 AUTHENTICATION FLOW
+
+┌─────────────┐
+│   Browser   │
+│  POST /auth/login (email + password)
+└──────┬──────┘
+       │
+       ▼
+┌─────────────────────────────────────────────────────────────┐
+│  🟢 CONTROLLER                                              │
+│  authController.post('/login')                              │
+│  └── Calls authService.login(email, password)              │
+└──────┬──────────────────────────────────────────────────────┘
+       │
+       ▼
+┌─────────────────────────────────────────────────────────────┐
+│  🟡 SERVICE                                                 │
+│  authService.login()                                        │
+│  ├── User.findOne({ email })                               │
+│  ├── bcrypt.compare(password, user.password)               │
+│  └── generateAuthToken(user) → JWT (expires 2h)           │
+└──────┬──────────────────────────────────────────────────────┘
+       │
+       ▼
+┌─────────────────────────────────────────────────────────────┐
+│  🟢 CONTROLLER                                              │
+│  res.cookie('auth', token)                                 │
+│  res.redirect('/')                                          │
+└──────┬──────────────────────────────────────────────────────┘
+       │
+       ▼
+┌─────────────┐
+│   Browser   │
+│  Redirect to / (authenticated)
+└─────────────┘
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🔀 MIDDLEWARE PIPELINE
+
+┌─────────────────────────────────────────────────────────────┐
+│  Every Request                                              │
+└──────┬──────────────────────────────────────────────────────┘
+       │
+       ▼
+┌─────────────────────────────────────────────────────────────┐
+│  1. express.static()          # Serve CSS/images           │
+└──────┬──────────────────────────────────────────────────────┘
+       │
+       ▼
+┌─────────────────────────────────────────────────────────────┐
+│  2. express.urlencoded()      # Parse form data            │
+└──────┬──────────────────────────────────────────────────────┘
+       │
+       ▼
+┌─────────────────────────────────────────────────────────────┐
+│  3. cookieParser()            # Parse cookies              │
+└──────┬──────────────────────────────────────────────────────┘
+       │
+       ▼
+┌─────────────────────────────────────────────────────────────┐
+│  4. authMiddleware()          # Verify JWT & set req.user  │
+│     ├── If token valid → req.isAuthenticated = true        │
+│     ├── res.locals.isAuthenticated = true                  │
+│     └── res.locals.user = decoded                          │
+└──────┬──────────────────────────────────────────────────────┘
+       │
+       ▼
+┌─────────────────────────────────────────────────────────────┐
+│  5. Routes → Controller → Service → Model → Response       │
+└─────────────────────────────────────────────────────────────┘
+````
 
 
 ## 📁 Project Structure
