@@ -2,24 +2,6 @@
 
 A full-stack web application for movie enthusiasts to discover, review, and manage movies and casts. Built with modern JavaScript technologies following MVC architecture.
 
-## 📋 Table of Contents
-- [Overview](#overview)
-- [Live Demo](#live-demo)
-- [Technologies Used](#technologies-used)
-- [Architecture](#architecture)
-- [Project Structure](#project-structure)
-- [Features](#features)
-- [Data Models](#data-models)
-- [Installation](#installation)
-- [Environment Variables](#environment-variables)
-- [Usage](#usage)
-- [API Endpoints](#api-endpoints)
-- [Authentication & Authorization](#authentication--authorization)
-- [Error Handling](#error-handling)
-- [Database Schema](#database-schema)
-- [Contributing](#contributing)
-- [License](#license)
-
 ## 🌟 Overview
 
 Movie Magic is a comprehensive back-end workshop project demonstrating full-stack JavaScript development. Users can browse movies, create new movie entries, manage cast members, and interact with content through a secure authentication system.
