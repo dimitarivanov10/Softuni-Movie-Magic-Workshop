@@ -110,7 +110,7 @@ function getMovieCategoryViewData(selectedCategory) {
     ...category,
     selected: selectedCategory === category.value ? "selected" : "",
   }));
-
+ 
   return viewData;
 }
 
